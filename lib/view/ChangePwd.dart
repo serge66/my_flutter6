@@ -5,7 +5,7 @@ import 'package:flutter_boost/flutter_boost.dart';
 import 'package:flutter/services.dart';
 import 'package:my_flutter6/utils/NetUtil.dart';
 import 'package:my_flutter6/utils/common_error_handler_utils.dart';
-import 'package:my_flutter6/widget/NetLoadingDialog.dart';
+import 'package:my_flutter6/widget/ProgressDialog.dart';
 import 'package:my_flutter6/widget/Toast.dart';
 import 'package:my_flutter6/widget/LoadingDialog.dart';
 import 'package:my_flutter6/utils/ApiInterface.dart';
@@ -49,11 +49,13 @@ class _ChangePwd extends State<ChangePwd> {
             },
           ),
         ),
-        body: ModalProgressHUD(
-            child: Container(
-              child: MyBody(setShowHind),
-            ),
-            inAsyncCall: _saving),
+        body: ProgressDialog(
+          loading: _saving,
+          msg: '正在加载...',
+          child: Container(
+            child: MyBody(setShowHind),
+          ),
+        ),
       ),
     );
   }
