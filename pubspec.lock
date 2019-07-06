@@ -61,7 +61,7 @@ packages:
       name: flutter_boost
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.0.417"
+    version: "0.0.419"
   flutter_spinkit:
     dependency: "direct main"
     description:
