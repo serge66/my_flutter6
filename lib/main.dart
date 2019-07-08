@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:ui';
 import 'package:flutter_boost/flutter_boost.dart';
 import 'package:my_flutter6/view/ChangePwd.dart';
 
@@ -11,6 +10,9 @@ class MyApp2 extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp2> {
+
+final String uniqueId="sdfsfsdfsdf";
+
   @override
   void initState() {
     super.initState();
@@ -19,14 +21,28 @@ class _MyAppState extends State<MyApp2> {
     FlutterBoost.singleton.registerPageBuilders({
       'zhuku://firstPage': (pageName, params, _) => MyApp(),
       'zhuku://secondPage': (pageName, params, _) => MyApp(),
-      'zhuku://ChangePwd': (pageName, params, _) {
+      'zhuku://ChangePwd': (pageName, params, uniqueId) {
         print('params--------$params');
-        return ChangePwd(params);
+        return ChangePwd(params: params,uniqueId:uniqueId);
       },
     });
 
     ///query current top page and load it
     FlutterBoost.handleOnStartPage();
+  }
+  @override
+  void deactivate() {
+    // TODO: implement deactivate
+
+    print("------------main deactivate");
+    super.deactivate();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    print("------------main dispose");
+    super.dispose();
   }
 
   @override
