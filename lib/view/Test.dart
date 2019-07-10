@@ -12,19 +12,29 @@ import 'package:my_flutter6/utils/ApiInterface.dart';
 // var mParams;
 // bool _saving = false;
 
-class ChangePwd extends StatelessWidget {
-  ChangePwd({this.params, this.uniqueId});
+class Test extends StatelessWidget {
+  Test({this.params, this.uniqueId});
   final Map params;
   final String uniqueId;
-  
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: '修改密码',
-      theme: ThemeData(
-        primaryColor: Colors.blue,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('修改密码'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            // Navigator.of(context)
+            //     .pushNamedAndRemoveUntil("/", (route) => false);
+            // FlutterBoost.containerManager.deactivate();
+            // FlutterBoost.containerManager.dispose();
+            // FlutterBoost.containerManager.remove(widget.uniqueId);
+            FlutterBoost.singleton.closePageForContext(context);
+          },
+        ),
       ),
-      home: MyApp(params: params, dialogShow: false, uniqueId: uniqueId),
+      body: MyApp(params: params, dialogShow: false, uniqueId: uniqueId),
     );
   }
 }
@@ -43,7 +53,6 @@ class MyApp extends StatefulWidget {
 class _ChangePwd extends State<MyApp> {
   Timer timer;
   bool dialogShow;
-  
 
   _ChangePwd({this.dialogShow});
 
@@ -143,84 +152,68 @@ class _ChangePwd extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('修改密码'),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            // Navigator.of(context)
-            //     .pushNamedAndRemoveUntil("/", (route) => false);
-            // FlutterBoost.containerManager.deactivate();
-            // FlutterBoost.containerManager.dispose();
-            // FlutterBoost.containerManager.remove(widget.uniqueId);
-            FlutterBoost.singleton.closePageForContext(context);
-          },
-        ),
-      ),
-      body: ProgressDialog(
-        loading: dialogShow,
-        msg: '正在加载...',
-        child: Container(
-          color: Colors.white,
-          padding: const EdgeInsets.all(15),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              Container(
-                child: TextField(
-                  controller: _textEditingController,
-                  decoration: InputDecoration(
-                      hintText: '请输入旧密码',
-                      hintStyle: TextStyle(fontSize: 14, color: Colors.grey),
-                      labelText: '旧密码',
-                      labelStyle: TextStyle(fontSize: 14, color: Colors.black)),
-                  minLines: 1,
-                  maxLines: 1,
-                ),
+    return ProgressDialog(
+      loading: dialogShow,
+      msg: '正在加载...',
+      child: Container(
+        color: Colors.white,
+        padding: const EdgeInsets.all(15),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            Container(
+              child: TextField(
+                controller: _textEditingController,
+                decoration: InputDecoration(
+                    hintText: '请输入旧密码',
+                    hintStyle: TextStyle(fontSize: 14, color: Colors.grey),
+                    labelText: '旧密码',
+                    labelStyle: TextStyle(fontSize: 14, color: Colors.black)),
+                minLines: 1,
+                maxLines: 1,
               ),
-              Container(
-                child: TextField(
-                  controller: _textEditingController2,
-                  decoration: InputDecoration(
-                      hintText: '请输入新密码',
-                      hintStyle: TextStyle(fontSize: 14, color: Colors.grey),
-                      labelText: '新密码',
-                      labelStyle: TextStyle(fontSize: 14, color: Colors.black)),
-                  keyboardType: TextInputType.number,
-                  minLines: 1,
-                  maxLines: 1,
-                ),
+            ),
+            Container(
+              child: TextField(
+                controller: _textEditingController2,
+                decoration: InputDecoration(
+                    hintText: '请输入新密码',
+                    hintStyle: TextStyle(fontSize: 14, color: Colors.grey),
+                    labelText: '新密码',
+                    labelStyle: TextStyle(fontSize: 14, color: Colors.black)),
+                keyboardType: TextInputType.number,
+                minLines: 1,
+                maxLines: 1,
               ),
-              Container(
-                child: TextField(
-                  controller: _textEditingController3,
-                  decoration: InputDecoration(
-                      hintText: '请确认新密码',
-                      hintStyle: TextStyle(fontSize: 14, color: Colors.grey),
-                      labelText: '新密码',
-                      labelStyle: TextStyle(fontSize: 14, color: Colors.black)),
-                  keyboardType: TextInputType.number,
-                  minLines: 1,
-                  maxLines: 1,
-                ),
+            ),
+            Container(
+              child: TextField(
+                controller: _textEditingController3,
+                decoration: InputDecoration(
+                    hintText: '请确认新密码',
+                    hintStyle: TextStyle(fontSize: 14, color: Colors.grey),
+                    labelText: '新密码',
+                    labelStyle: TextStyle(fontSize: 14, color: Colors.black)),
+                keyboardType: TextInputType.number,
+                minLines: 1,
+                maxLines: 1,
               ),
-              Container(
-                margin: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
-                child: RaisedButton(
-                  padding: const EdgeInsets.fromLTRB(40, 5, 40, 5),
-                  child: Text(
-                    "确认",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  color: Colors.blue,
-                  onPressed: () {
-                    commit(context);
-                  },
+            ),
+            Container(
+              margin: const EdgeInsets.fromLTRB(0.0, 30.0, 0.0, 0.0),
+              child: RaisedButton(
+                padding: const EdgeInsets.fromLTRB(40, 5, 40, 5),
+                child: Text(
+                  "确认",
+                  style: TextStyle(color: Colors.white),
                 ),
+                color: Colors.blue,
+                onPressed: () {
+                  commit(context);
+                },
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

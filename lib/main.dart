@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_boost/flutter_boost.dart';
 import 'package:my_flutter6/view/ChangePwd.dart';
 
+import 'view/Test.dart';
+
 void main() => runApp(MyApp2());
 
 class MyApp2 extends StatefulWidget {
@@ -10,8 +12,7 @@ class MyApp2 extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp2> {
-
-final String uniqueId="sdfsfsdfsdf";
+  final String uniqueId = "sdfsfsdfsdf";
 
   @override
   void initState() {
@@ -23,35 +24,41 @@ final String uniqueId="sdfsfsdfsdf";
       'zhuku://secondPage': (pageName, params, _) => MyApp(),
       'zhuku://ChangePwd': (pageName, params, uniqueId) {
         print('params--------$params');
-        return ChangePwd(params: params,uniqueId:uniqueId);
+        return ChangePwd(params: params, uniqueId: uniqueId);
       },
     });
 
     ///query current top page and load it
     FlutterBoost.handleOnStartPage();
   }
+
   @override
   void deactivate() {
-    // TODO: implement deactivate
-
     print("------------main deactivate");
     super.deactivate();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     print("------------main dispose");
     super.dispose();
   }
 
   @override
-  Widget build(BuildContext context) => MaterialApp(
-      title: 'Flutter Boost example',
-      builder: FlutterBoost.init(),
+  Widget build(BuildContext context) {
+    return ExcludeSemantics(
+      excluding: true,
+      child: MaterialApp(
+          builder: FlutterBoost.init(),
+          theme: ThemeData(
+              brightness: Brightness.light,
+              accentColor: Colors.white,
+              primaryColor: Colors.grey),
 
-      ///init container manager
-      home: Container());
+          ///init container manager
+          home: Container()),
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {
